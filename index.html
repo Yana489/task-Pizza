@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/style.css">
+   <title>Task Pizza</title>
+</head>
+<body>
+   <form name="pizzas" class="pizzas">
+      <label for="pizza">Виберіть піцу:</label>
+      <select name="pizza" id="pizza">
+         <option value="margarita">Маргарита</option>
+         <option value="peperoni">Пепероні</option>
+         <option value="salami">Салямі</option>
+         <option value="cheeses">4 Cира</option>
+      </select> <br>
+      <label for="pizza-size">Виберіть розмір піци (7$/10$/13$):</label>
+      <select name="pizza-size" id="size">
+         <option data-size-price="7" value="7">маленька</option>
+         <option data-size-price="10" value="10">середня</option>
+         <option data-size-price="13" value="13">велика</option>
+      </select><br>
+      <label>Додаткові інгредієнти 1$:
+         <input type="checkbox" name="ingredients" data-price="1" value="mushrooms">
+         Гриби
+      </label>
+      <label>
+         <input type="checkbox" name="ingredients" data-price="1" value="salami">
+         Салямі
+      </label>
+      <label>
+         <input type="checkbox" name="ingredients" data-price="1" value="pensils">
+         Оливки
+      </label>
+   </form>
+   <div class="result"></div>
+   <button class="sendBtn" type="submit">Замовити</button>
+   <script src="js/script.js"></script>
+</body>
+</html>
