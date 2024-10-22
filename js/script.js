@@ -12,37 +12,47 @@
 // 4. Додай кнопку “Замовити”, яка виведе повідомлення з підтвердженням замовлення разом із деталями.
 
 let ingredients = document.querySelectorAll('[data-price]');
-let sizePrice = document.querySelectorAll('[data-size-price]');
-let sendBnt = document.querySelector('.sendBtn');
+let selectedPizza;
+let selected;
+let selectedText;
+let ingredientsValues;
+let priceTotal = 0;
 
 document.body.addEventListener('change', (event) => {
-   let target= event.target
-   let priceTotal = 0;
+   let target= event.target;
    
-   for(let i = 0; i < ingredients.length; i++) {
-      if (ingredients[i].checked){
-         const price = +target.dataset.price;
-         priceTotal += price;
-      } 
-   }
-   let selectedPizza = Array.from(pizza.options)
+   if (target.getAttribute('type') === "checkbox"){
+      for(let i = 0; i < ingredients.length; i++){
+         if (ingredients[i].checked){
+            const price = target.dataset.price;
+            priceTotal += +price;
+         };
+      };
+   };
+
+   ingredientsValues = Array.from(ingredients)
+   .filter(checkbox => checkbox.checked)
+   .map(checkbox => checkbox.value);
+   
+   selectedPizza = Array.from(pizza.options)
    .filter(option => option.selected)
    .map(option => option.text);
    
-   let selected = Array.from(size.options)
+   selected = Array.from(size.options)
    .filter(option => option.selected)
    .map(option => option.value);
 
-   let selectedText = Array.from(size.options)
+   selectedText = Array.from(size.options)
    .filter(option => option.selected)
    .map(option => option.text);
    
-document.querySelector('.result').innerHTML ='Ви обрали піцу: ' + selectedPizza + ',<br> Розмір піци: ' + selectedText + ',<br>Додаткові інгредієнти: '+ ',<br>Загальна вартість: ' + (priceTotal + +selected) + '$'
-})
+document.querySelector('.result').innerHTML ='Ви обрали піцу: ' + selectedPizza + ',<br> Розмір піци: ' + selectedText + ',<br>Додаткові інгредієнти: '+ ingredientsValues + ',<br>Загальна вартість: ' + (priceTotal + +selected) + '$'
+});
 
 document.querySelector('.sendBtn').addEventListener('click', (event) => {
    if(!document.querySelector('.result').innerHTML) {
       event.preventDefault();
    } else {
-      alert("Замовлення підтвердженно!")}
-})
+      alert('Замовлення підтвердженно! Ви обрали піцу: ' + selectedPizza + '; розмір піци: ' + selectedText + '; додаткові інгредієнти: '+ ingredientsValues + '; загальна вартість: ' + (priceTotal + +selected) + '$')
+   }
+});
